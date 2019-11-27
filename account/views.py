@@ -4,11 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 #app
-from .serializers import (
-    CreateUserSerializer, 
-    UserSerializer, 
-    LoginUserSerializer
-)
+from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer
 from .models import User
 from knox.models import AuthToken
 
@@ -18,7 +14,13 @@ from knox.models import AuthToken
 def HelloAPI(request):
     return Response("hello world!")
 
+class UserAPI(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserSerializer
 
+    def get_object(self):
+        return self.request.user
+        
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer
 
@@ -56,9 +58,3 @@ class LoginAPI(generics.GenericAPIView):
         )
 
 
-class UserAPI(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-    serializer_class = UserSerializer
-
-    def get_object(self):
-        return self.request.user

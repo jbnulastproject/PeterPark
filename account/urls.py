@@ -1,5 +1,6 @@
-from django.urls import path, include
+from django.urls import path
 from .views import HelloAPI, RegistrationAPI, LoginAPI, UserAPI
+from django.conf.urls import include, url
 
 urlpatterns = [
     path("hello/", HelloAPI),
@@ -7,3 +8,4 @@ urlpatterns = [
     path("auth/login/", LoginAPI.as_view()),
     path("auth/user/", UserAPI.as_view()),
 ]
+

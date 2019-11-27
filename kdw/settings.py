@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'blog',
     'knox',
     'rest_framework',
-    'account',
+    'account.apps.AccountConfig',
 ]
 
 
