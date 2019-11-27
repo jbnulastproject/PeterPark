@@ -2,7 +2,7 @@
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
+
 #app
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer
 from .models import User
@@ -10,9 +10,6 @@ from knox.models import AuthToken
 
 
 # Create your views here.
-@api_view(["GET"])
-def HelloAPI(request):
-    return Response("hello world!")
 
 class UserAPI(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -22,6 +19,7 @@ class UserAPI(generics.RetrieveAPIView):
         return self.request.user
         
 class RegistrationAPI(generics.GenericAPIView):
+    #오류는 여기서!
     serializer_class = CreateUserSerializer
 
     def post(self, request, *args, **kwargs):
