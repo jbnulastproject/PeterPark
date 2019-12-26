@@ -24,7 +24,7 @@ class RegistrationAPI(generics.GenericAPIView):
     
     def post(self, request,*args, **kwargs):
         if len(request.data["username"]) < 6 or len(request.data["password"]) < 4:
-            body = {"message": "wrong"}
+            body = {"message": "wrong"} #나중에 메세지 다시 수정하기
             return Response(body, status = status.HTTP_400_BAD_REQUEST)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
